@@ -16,15 +16,14 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from token_auth import views
+from . import views
 
 urlpatterns = [
     url(r'^home/$', views.home),
     url(r'^meta/$', views.display_meta),
-    url(r'^login-form/$',views.login_form),
-    url(r'^login/$',views.login),
     url(r'^sign-up-form/$', views.sign_up_form),
     url(r'^signup/$', views.signup),
     url(r'^getToken/$', views.getToken),
     url(r'^returnToken/$',views.returnToken),
+    url(r'^import-users/$', views.import_users),
 ]

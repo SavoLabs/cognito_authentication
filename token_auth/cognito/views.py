@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.db import models
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from warrant import Cognito
-from .models import CongnitoUser
+from .models import CognitoUser
 import boto3
 import datetime
 
@@ -17,8 +20,26 @@ def import_users(request):
     cognito = boto3.client('cognito-idp',region_name='us-east-2')
     response = cognito.list_users(UserPoolId=USER_POOL_ID,AttributesToGet=[],)
 
+    for Users in response['Users']:
+        response2 = cognito.admin_get_user(UserPoolId=USER_POOL_ID,
+                                           Username=Users['Username'])
+
+        name = Users['Username']
+
+        for attribute in response2['UserAttributes']:
+            if attribute['Name']=='email':
+                e_mail = attribute['Value']
+
+        user = User.objects.create_user(name,e_mail, DEFAULT_PASSWORD)
+        user.save()
+
+    return render(request, 'import_users.html')
+
+@login_required
 def home(request):
         return render(request, 'home.html')
+
+@login_required
 def display_meta(request):
         values = request.META
         html = []
@@ -26,27 +47,7 @@ def display_meta(request):
             html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, values[k]))
         return HttpResponse('<table>%s</table>' % '\n'.join(html))
 
-def login_form(request):
-    return render(request, 'login_form.html')
-
-def login(request):
-    error = False
-    if 'user' in request.GET:
-        user = request.GET['user']
-        passwd = request.GET['password']
-
-        print user
-        print passwd
-        u = Cognito(USER_POOL_ID,CLIENT_ID,username = user)
-
-        try:
-            u.admin_authenticate(password=passwd)
-        except:
-            error = True
-
-        return render(request, 'login.html', {'error': error,
-                                              'logged_in': logged_in})
-
+@login_required
 def getToken(request):
     cognito = boto3.client('cognito-idp',region_name='us-east-2')
     response = cognito.list_users(UserPoolId=USER_POOL_ID,
@@ -58,9 +59,8 @@ def getToken(request):
 
     return render(request, 'getToken.html',
                   {'users': users, 'idp_id': IDENTITY_POOL_ID,
-                   'pool_id': USER_POOL_ID, 'client_id': CLIENT_ID,
-                   'logged_in': logged_in})
-
+                   'pool_id': USER_POOL_ID, 'client_id': CLIENT_ID})
+@login_required
 def returnToken(request):
     error = False
     if 'user' in request.GET:
@@ -73,11 +73,13 @@ def returnToken(request):
             error = True
         return render(request, 'returnToken.html',
                       {'user': user, 'r_token': u.refresh_token,
-                       'error': error, 'logged_in':logged_in})
+                       'error': error})
 
+@login_required
 def sign_up_form(request):
-    return render(request, 'sign_up_form.html',{'logged_in': logged_in})
+    return render(request, 'sign_up_form.html')
 
+@login_required
 def signup(request):
     cognito = boto3.client('cognito-idp',region_name='us-east-2')
     if 'user' in request.GET:
@@ -97,15 +99,13 @@ def signup(request):
 
         u.admin_authenticate(password=DEFAULT_PASSWORD)
 
-        new_user = CognitoUser(name=user,pswd=DEFAULT_PASSWORD,
-                                               tenant_id=t_id,user_id=u_id,
-                                               lib_view = '*')
+        new_user = User.objects.create_user(user, email_add, DEFAULT_PASSWORD)
+
 
         new_user.save()
         return render(request, 'signup.html',{'user':user,
                                               'email': email_add,
-                                              'r_token': u.refresh_token,
-                                              'logged_in': logged_in})
+                                              'r_token': u.refresh_token})
 
 
 

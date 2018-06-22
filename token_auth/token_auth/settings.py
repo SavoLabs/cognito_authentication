@@ -25,7 +25,7 @@ SECRET_KEY = 'i5@ptwfhc8c8c2%zg$tivj7n#8td4r&kbte2r$d!=und3xed&$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.56.1','10.222.110.98','127.0.0.1',]
 
 
 # Application definition
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'token_auth.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR,'cognito/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,8 +123,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    '/home/quinn/py-boto/cognito-auth/token_auth/token_auth/static',
+    ('/home/quinn/py-boto/cognito_authentication/token_auth/static'),
 ]
 
-LOGIN_REDIRECT_URL='/home'
+LOGIN_REDIRECT_URL='/cognito/home/'
 
+LOGIN_URL = '/login/'
