@@ -1,0 +1,20 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="sylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" >
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap    -theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/token_auth.css' %}">
+        <title>Authentication Failure</title>
+    </head>
+    <body>
+        <div class="login">
+            <p align="center"> You have not been authenticated to access this page</p>
+            <p align="center"> Please login and try again </p>
+            <form action="/cognito/login-form/" method="get">
+                <div class="buttonHelper">
+                    <input type="submit" value= "Go to Login Page">
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

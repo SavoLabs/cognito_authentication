@@ -1,6 +1,6 @@
 from django.db import models
 
-class CognitoUser(models.Model):
+class User(models.Model):
     name = models.CharField(max_length=100)
     pswd = models.CharField(max_length=100)
     tenant_id = models.CharField(max_length=10)

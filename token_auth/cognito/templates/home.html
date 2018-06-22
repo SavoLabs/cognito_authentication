@@ -1,15 +1,29 @@
+{% load static %}
 <html>
     <head>
+        <link rel="sylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"    >
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/token_auth.css' %}">
         <title>Migration Authentication Helper</title>
     </head>
     <body>
-        <p> Select Sign Up to create a new user </p>
-        <form action="/cognito/sign-up-form/" method="get">
-            <input type="submit" value="Sign Up">
-        </form>
-        <p> Select Existing User to get a list of users and get the refresh token for a chosen user</p>
-        <form action="/cognito/getToken/" method="get">
-            <input type = "submit" value = "Existing User">
-        </form>
+        <section class="container">
+            <div class="left">
+                <p> Select Sign Up to create a new user </p>
+                <form action="/cognito/sign-up-form/" method="get">
+                    <div class="buttonHelper">    
+                        <input type="submit" value="Sign Up">
+                    </div>
+                </form>
+            </div>
+            <div class="right">
+                <p> Select Existing User to get a list of users and get the refresh token for a chosen user</p>
+                <form action="/cognito/getToken/" method="get">
+                    <div class="buttonHelper">
+                        <input type = "submit" value = "Existing User" align="center">
+                    </div>
+                </form>
+            </div>
+        </section>
     </body>
 <html>

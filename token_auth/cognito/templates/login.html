@@ -1,0 +1,18 @@
+{% load static %}
+<html>
+    <head>
+        <title>Login</title>
+    </head>
+    <body>
+    {% if error %}
+        <form action="/cognito/login-form/" method = "get">
+            <p style="color:red">Incorrect Username or Password.</p>
+            <input type = "submit" value =  "Go Back">
+        </form>
+    {% else %}
+        <form action="/cognito/home/" = "get">
+            <input type= "submit" value = "Go to home page">
+        </form>
+    {% endif %}
+    </body>
+<html>

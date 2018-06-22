@@ -1,9 +1,25 @@
+:x
 <html>
     <head>
+        <link rel="sylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/token_auth.css' %}">
         <title>Refresh Token</title>
     </head>
     <body>
-        <p> Refresh Token for <strong> {{user}}</strong></p>
-        <p> <strong>{{r_token}}</strong></p>
+        <div>
+            <h1><a href="/">This should be orange</a></h1>
+        </div>
+            {% if error %}
+            <form action="/getToken/" method = "get">
+                <p> The following username/password is incorrect</p>
+                <input type = "submit" value = "Go Back">
+            </form>
+        {% else %}
+            <p align = "left"> Refresh Token for <strong> {{user}}</strong></p>
+            <div class="token">{{r_token}}</div>
+        {% endif %}
     </body>
 <html>
+
+

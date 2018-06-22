@@ -19,6 +19,6 @@ from django.contrib import admin
 from token_auth import views
 
 urlpatterns = [
-    url(r'^cognito/', include('cognito.urls')),
-    url(r'^admin/', admin.site.urls),
+    url(r'^cognito/',include('cognito.urls')),
+    url(r'^admin/',admin.site.urls),
 ]

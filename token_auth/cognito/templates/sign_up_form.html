@@ -7,11 +7,27 @@
         <p> The refresh token will be displayed upon sucessful creation </p>
 
         <form action = "/cognito/signup/" method = "get">
-            <input type= "text" name = "user">
-            <input type= "text" name = "email_addr">
-            <input type="text" name="tenant">
-            <input type="text" name="user_id">
-            <input type="submit" value = "Create User">
+            <table>
+                <tr>
+                    <td align="right">Username:</td>
+                    <td align="left"><input type= "text" name = "user"/></td>
+                </tr>
+                <tr>
+                    <td align = "right">Email:</td>
+                    <td align = "left"><input type= "text" name = "email_addr"/></td>
+                </tr>
+                <tr>
+                    <td align = "right">Tenant ID:</td>
+                    <td align = "left"><input type="text" name = "tenant_id"/></td>
+                </tr>
+                <tr>
+                    <td align = "right">User ID:</td>
+                    <td align = "left"><input type="text" name = "user_id"/></td>
+                </tr>
+            </table>    
+                
+            <td align = "left"><input type="submit" value = "Create User"/></td>
+                
         </form>
     </body>
 </html>
