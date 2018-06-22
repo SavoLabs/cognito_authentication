@@ -1,0 +1,23 @@
+<html>
+    <head>
+    <title>Choose User</title>
+    </head>
+    <body>
+        <p>Using Identity Pool <strong> {{ idp_id }}</strong></p>
+        <p>Using User Pool <strong> {{pool_id}}</strong></p>
+        <p> Using Client <strong> {{client_id}}</strong></p>
+
+        {% if users %}
+            <ul>
+                {% for user in users %}
+                    <li>{{ user }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form action="/cognito/returnToken/" method = "get">
+            <input type = "text" name = "user">
+            <input type = "submit" value = "Get Token">
+        </form>
+    </body>
+</html>
