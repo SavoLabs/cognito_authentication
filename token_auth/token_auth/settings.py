@@ -123,9 +123,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    ('/home/quinn/py-boto/cognito_authentication/token_auth/static'),
+    ('/home/quinn/py-boto/cognito_authentication/token_auth/cognito/static'),
 ]
 
 LOGIN_REDIRECT_URL='/cognito/home/'
 
-LOGIN_URL = '/login/'
+LOGIN_URL = '/cognito/login/'

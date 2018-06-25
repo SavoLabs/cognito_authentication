@@ -1,29 +1,44 @@
+{% extends 'base.html' %}
 {% load static %}
-<html>
-    <head>
-        <link rel="sylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"    >
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static 'css/token_auth.css' %}">
-        <title>Migration Authentication Helper</title>
-    </head>
-    <body>
-        <section class="container">
-            <div class="left">
-                <p> Select Sign Up to create a new user </p>
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="card mb-3 text-center">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Automated User Creation</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Create New User</li>
+                    <li> Get Refresh Token</li>
+                </ul>
                 <form action="/cognito/sign-up-form/" method="get">
-                    <div class="buttonHelper">    
-                        <input type="submit" value="Sign Up">
-                    </div>
+                    <input type ="submit" class="btn btn-lg btn-block btn-outline-primary" value="Create User">
                 </form>
             </div>
-            <div class="right">
-                <p> Select Existing User to get a list of users and get the refresh token for a chosen user</p>
+        </div>        
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Fetch Token for Exsiting User</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Lists users in the Cognito Pool</li>
+                    <li>Returns the refresh token for a choosen user</li>
+                </ul>
                 <form action="/cognito/getToken/" method="get">
-                    <div class="buttonHelper">
-                        <input type = "submit" value = "Existing User" align="center">
-                    </div>
+                    <input type = "submit" class="btn btn-lg btn-block btn-outline-primary" value = "User List" align="center">
                 </form>
             </div>
-        </section>
-    </body>
-<html>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,8 +1,10 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import *
+from django.http import *
 from django.db import models
+from django.template import RequestContext
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import *
 from warrant import Cognito
 from .models import CognitoUser
 import boto3
@@ -34,6 +36,25 @@ def import_users(request):
         user.save()
 
     return render(request, 'import_users.html')
+
+def login_user(request):
+    logout(request)
+    username = password = ''
+    if request.POST:
+        print "got to post"
+        uname=request.POST['username']
+        password=request.POST['password']
+
+        print username
+        print password
+        user = authenticate(username=uname, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request,user)
+                return HttpResponseRedirect('/cognito/home/')
+    return render(request, 'login.html')
+
+
 
 @login_required
 def home(request):
