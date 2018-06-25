@@ -84,8 +84,8 @@ def getToken(request):
 @login_required
 def returnToken(request):
     error = False
-    if 'user' in request.GET:
-        user = request.GET['user']
+    if 'user' in request.POST:
+        user = request.POST['user']
         u = Cognito(USER_POOL_ID,CLIENT_ID,username = user)
 
         try:
