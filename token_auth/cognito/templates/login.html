@@ -12,7 +12,10 @@
     <body class="text-center" data-gr-c-s-loaded="true">
         <form class="form-signin" method="post">
             {% csrf_token %}
-            <h1 class="h3 mb-3 font-weight-normal">Please Sign in</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Authentication Helper</h1>
+            <h6 style="color: red; font-size: 14px;" class="h3 mb-3 font-weight-normal">
+                {{ login_message }}
+            </h6>
             <label for="inputUser" class="sr-only">Username</label>
             <input type="text" name="username" id="inputUser" class="form-control" placeholder="Username" required="" autofocus="">
             <label for="inputPassword" class="sr-only">Password</label>

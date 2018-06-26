@@ -1,24 +1,20 @@
-:x
-<html>
-    <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static 'css/token_auth.css' %}">
-        <title>Refresh Token</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">This should be orange</a></h1>
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="card mb-3 text-center">
+        <div class="card box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Refresh Token for {{user}}</h4>
+            </div>
+            <div class="card-body">              
+                <p class="card-text" style="display: inline-block; max-width: 700px;">{{r_token}}</p>
+            </div>
         </div>
-            {% if error %}
-            <form action="/getToken/" method = "get">
-                <p> The following username/password is incorrect</p>
-                <input type = "submit" value = "Go Back">
-            </form>
-        {% else %}
-            <p align = "left"> Refresh Token for <strong> {{user}}</strong></p>
-            <div class="token">{{r_token}}</div>
-        {% endif %}
-    </body>
-<html>
-
+    </div>
+</div>
+{% endblock %}
 

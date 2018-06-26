@@ -15,8 +15,10 @@
                 {% endfor %}
             </ul>
         {% endif %}
-
-        <form action="/cognito/returnToken/" method = "get">
+        <form action="/cognito/returnToken/" method = "post">
+            {% csrf_token %}
+            <h6 style="color: red; font-size: 14px;" class="h3 mb-3 font-weight-normal">
+                {{ error_message }}</h6>
             <input type = "text" name = "user">
             <input type = "submit" value = "Get Token">
         </form>
