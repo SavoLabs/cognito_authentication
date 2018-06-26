@@ -25,7 +25,7 @@ def import_users():
 
     for Users in response['Users']:
         response2 = cognito.admin_get_user(UserPoolId=USER_POOL_ID,Username=Users['Username'])
-        time.sleep(.05)
+        time.sleep(.06)
         name = Users['Username']
         current_user = User.objects.all().filter(username=name)
         if not current_user:
