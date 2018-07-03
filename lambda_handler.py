@@ -39,6 +39,7 @@ def lambda_handler(event, context):
             print "getting refresh token"
 
             return {
-                'statusCode':200,
+                'statusCode': 200,
+                'headers': {'Content-Type': 'application/json'},
                 'body': json.dumps({'refresh_token' : u.refresh_token})
             }
