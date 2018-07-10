@@ -1,0 +1,25 @@
+---
+swagger: "2.0"
+info:
+  version: "2018-07-02T19:41:21Z"
+  title: "token-auth-api"
+host: "7378nj8dx3.execute-api.us-east-2.amazonaws.com"
+basePath: "/prod"
+schemes:
+- "https"
+paths:
+  /cognito-auth:
+    x-amazon-apigateway-any-method:
+      responses:
+        200:
+          description: "200 response"
+  /{proxy+}:
+    x-amazon-apigateway-any-method:
+      produces:
+      - "application/json"
+      parameters:
+      - name: "proxy"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
